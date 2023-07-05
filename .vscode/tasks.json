@@ -6,6 +6,7 @@
 			"label": "go: test package",
 			"command": "test",
 			"args": [
+				"-v",
 				"${fileDirname}"
 			],
 			"problemMatcher": [
