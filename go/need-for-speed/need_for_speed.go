@@ -32,22 +32,14 @@ func NewTrack(distance int) Track {
 // the car will not move.
 func Drive(car Car) Car {
 	if car.batteryDrain <= car.battery {
-		car.battery = car.battery - car.batteryDrain
-		car.distance = car.distance + car.speed
+		car.battery -= car.batteryDrain
+		car.distance += car.speed
 	}
 	return car
 }
 
 // CanFinish checks if a car is able to finish a certain track.
 func CanFinish(car Car, track Track) bool {
-
-	remainingDistance := car.distance
-	for {
-		car = Drive(car)
-		if remainingDistance == car.distance {
-			return car.distance >= track.distance
-		} else {
-			remainingDistance = car.distance
-		}
-	}
+	maxDistance := (car.battery / car.batteryDrain) * car.speed
+	return maxDistance >= track.distance
 }
